@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { connectDB } from "./db";
 import { cors } from "hono/cors"; // Import CORS middleware
+import { ObjectId } from "mongodb";
 
 const app = new Hono();
 
@@ -65,7 +66,35 @@ app.use(
         console.error("❌ Error inserting user:", error);
         return c.json({ error: "Failed to get task" }, 500);
       }
-    })
+    });
+
+    // update task category
+    // Update task category
+    app.patch("/tasks/:id", async (c) => {
+      try {
+        const { id } = c.req.param();
+        const { category } = await c.req.json();
+
+        if (!ObjectId.isValid(id)) {
+          return c.json({ error: "Invalid task ID" }, 400);
+        }
+        
+        const result = await tasksCollection.updateOne(
+          { _id: new ObjectId(id) },
+          { $set: { category } }
+        );
+
+        if (result.matchedCount === 0) {
+          return c.json({ error: "Task not found" }, 404);
+        }
+
+        return c.json({ message: "Task updated successfully" });
+
+      } catch (error) {
+        console.error("❌ Error updating category:", error);
+        return c.json({ error: "Failed to update category" }, 500);
+      }
+    });
 
 
 
