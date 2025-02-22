@@ -1,7 +1,7 @@
 {
   "name": "task-manager-server",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot index.ts"
   },
   "dependencies": {
     "better-auth": "^1.1.15",
