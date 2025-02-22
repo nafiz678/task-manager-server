@@ -17,12 +17,12 @@ export async function connectDB(): Promise<Db> {
 
   if (!db) {
     await client.connect();
-    db = client.db("Doc-house");
+    db = client.db("Task-Manager");
   }
 
   try {
     const db = await client.connect();
-    const database = client.db("Task-Manager"); // ✅ Correctly assign the database instance
+    const database = client.db("Task-Manager"); 
 
     console.log("Connected to MongoDB");
     // Should show "collections"

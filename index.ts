@@ -9,7 +9,11 @@ const app = new Hono();
 app.use(
   "*",
   cors({
-    origin: "*", // Allows all origins (change to specific domain in production)
+    origin: [
+      "http://localhost:3000",
+      "https://task-manager-dnd-bc0a8.web.app",
+      "https://task-manager-dnd-bc0a8.firebaseapp.com",
+    ], // Allows all origins (change to specific domain in production)
     allowMethods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowHeaders: ["Content-Type"],
   })
