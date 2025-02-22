@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { connectDB } from "./db";
 import { cors } from "hono/cors"; // Import CORS middleware
 import { ObjectId } from "mongodb";
+export const runtime = 'nodejs'
 
 const app = new Hono();
 
@@ -12,6 +13,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://task-manager-zeta-flame.vercel.app",
+      "https://task-manager-fv8n.vercel.app",
     ], // Allows all origins (change to specific domain in production)
     allowMethods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowHeaders: ["Content-Type"],
